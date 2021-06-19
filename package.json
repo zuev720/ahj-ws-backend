@@ -1,0 +1,33 @@
+{
+  "name": "ahj-7.1-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "forever server.js",
+    "watch": "forever -w server.js",
+    "nodedemon": "nodemon ./server.js localhost 7070",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zuev720/ahj-7.1-backend.git"
+  },
+  "author": "Zuev Igor",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zuev720/ahj-7.1-backend/issues"
+  },
+  "homepage": "https://github.com/zuev720/ahj-7.1-backend#readme",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "forever": "^0.10.10",
+    "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "koa-router": "^10.0.0",
+    "websocket": "^1.0.34",
+    "ws": "^7.4.6",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
