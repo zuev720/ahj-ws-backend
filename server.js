@@ -14,18 +14,29 @@ app.use(koaBody({
     multipart: true,
     json: true,
 }));
-app.use(cors());
+
+
+app.use(
+    cors({
+        origin: '*',
+        credentials: true,
+        'Access-Control-Allow-Origin': true,
+        allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+    })
+);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
 
 
 router.get('/', async (ctx) => {
+    ctx.response.set( {'Access-Control-Allow-Origin':'*'});
     const {method} = ctx.request.query;
     if (method === 'login') {
         const {login} = ctx.request.query;
         chat.currentUsers.push(login)
         ctx.response.body = JSON.stringify(chat.storage);
+        console.log(chat.currentUsers)
         return;
     }
     ctx.response.body = 'app works!';
@@ -61,6 +72,7 @@ wsServer.on('connection', (ws) => {
             const login = message.login;
             chat.currentUsers.forEach((user, index) => {
                 if (user === login) chat.currentUsers.splice(index, 1);
+                console.log(chat.currentUsers)
             });
             Array.from(wsServer.clients)
                 .filter(o => o.readyState === WS.OPEN)
